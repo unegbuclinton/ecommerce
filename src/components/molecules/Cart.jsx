@@ -43,6 +43,7 @@ const CartWrapper = styled.div`
   height: 100vh;
   background-color: ${COLORS.white};
   padding: 2.2rem 0rem 2.7rem 1.4rem;
+  overflow: auto;
 `;
 
 const CartHeader = styled.h1`
