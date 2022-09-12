@@ -26,6 +26,7 @@ const Cart = ({ onClose }) => {
   console.log(totalPrice);
   return (
     <CartWrapper>
+      <CartEmpty></CartEmpty>
       <DPIconClose onClick={onClose} />
       <CartHeader>SHOPPING CART</CartHeader>
 
