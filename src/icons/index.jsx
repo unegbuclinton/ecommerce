@@ -1,0 +1,9 @@
+export { ReactComponent as DPIconCart } from './svgs/cart.svg';
+export { ReactComponent as DPIconClose } from './svgs/close.svg';
+export { ReactComponent as DPIconFast } from './svgs/fast.svg';
+export { ReactComponent as DPIconShipping } from './svgs/fastShip.svg';
+export { ReactComponent as DPIconMenu } from './svgs/menu.svg';
+export { ReactComponent as DPIconSocials } from './svgs/socials.svg';
+export { ReactComponent as DPIconSustain } from './svgs/sustain.svg';
+export { ReactComponent as DPIconThread } from './svgs/thread.svg';
+export { ReactComponent as DPIconUnique } from './svgs/unique.svg';
