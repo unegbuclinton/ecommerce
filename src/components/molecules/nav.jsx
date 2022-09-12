@@ -9,13 +9,23 @@ import MenuDropDown from './MenuDropDown';
 const NavBar = () => {
   const [show, setShow] = useState(false);
   const [cart, setCart] = useState(false);
+  const [navbar, setNavbar] = useState(false);
 
+  const ChangeNavbar = () => {
+    if (window.scrollY >= 90) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  window.addEventListener('scroll', ChangeNavbar);
   return (
     <>
       <CartMenu cart={cart}>
         <Cart onClose={() => setCart(false)} />
       </CartMenu>
-      <Wrapper>
+      <Wrapper navbar={navbar}>
         <div>
           <DPIconMenu onClick={() => setShow(true)} />
         </div>
@@ -36,8 +46,13 @@ export default NavBar;
 
 const Wrapper = styled.div`
   display: flex;
+  position: sticky;
+  top: 0px;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
+  background: ${({ navbar }) => (navbar ? COLORS.white : 'transparent')};
+  padding-top: 3rem;
 
   div {
     position: relative;
@@ -71,11 +86,11 @@ const DropDoenMenu = styled.div`
 `;
 
 const CartMenu = styled.div`
-  position: absolute;
+  position: fixed;
   top: -5px;
   left: 0;
   transform: ${({ cart }) => (cart ? 'traslateX(0)' : 'translateX(-100%)')};
   overflow: hidden;
-  z-index: 2;
+  z-index: 4;
   transition: 0.4s ease-in-out;
 `;
