@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { COLORS } from '../../constants/color';
@@ -12,15 +12,25 @@ import Button from '../atoms/Button';
 import CardItem from './CardItem';
 
 const Cart = ({ onClose }) => {
+  const [totalPrice, setTotalPrice] = useState(0);
   const { dataItem } = useSelector((state) => state.landing);
 
+  useEffect(() => {
+    var value = 0;
+    dataItem?.map(({ price }) => {
+      value += price;
+      setTotalPrice(value);
+      return value;
+    });
+  }, [dataItem]);
+  console.log(totalPrice);
   return (
     <CartWrapper>
       <DPIconClose onClick={onClose} />
       <CartHeader>SHOPPING CART</CartHeader>
 
       {!!dataItem.length ? (
-        <>
+        <div className="cardItem-container">
           {dataItem?.map(({ price, image, title }) => (
             <CartItemWrapper>
               <CardItem img={image} />
@@ -35,10 +45,20 @@ const Cart = ({ onClose }) => {
               </div>
             </CartItemWrapper>
           ))}
-        </>
+        </div>
       ) : (
         <CartEmpty>You have no item in your shopping bag</CartEmpty>
       )}
+
+      <CartTotal>
+        <p className="total-text">SUB TOTAL :</p>
+        <p className="total-value">${totalPrice}</p>
+      </CartTotal>
+      <CardInfoText>
+        *shipping charges, taxes and discount codes  are calculated at the time
+        of accounting.
+      </CardInfoText>
+      <Button className="footer-btn">CHECK OUT</Button>
     </CartWrapper>
   );
 };
@@ -48,8 +68,23 @@ export default Cart;
 const CartWrapper = styled.div`
   height: 100vh;
   background-color: ${COLORS.white};
-  padding: 2.2rem 0rem 2.7rem 1.4rem;
+  padding: 2.2rem 1rem 2.7rem 1rem;
   overflow: auto;
+
+  .cardItem-container {
+    border-bottom: 1px solid ${COLORS['border-color']};
+  }
+
+  .footer-btn {
+    width: 100%;
+    background-color: ${COLORS.black};
+    font-size: ${FONTSIZES.small};
+    padding: 1.5rem 0;
+    border-radius: 0.3rem;
+    font-weight: ${FONTWEIGHTS.bold};
+    color: ${COLORS.white};
+    margin-top: 2rem;
+  }
 `;
 
 const CartHeader = styled.h1`
@@ -58,6 +93,25 @@ const CartHeader = styled.h1`
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 6rem;
+`;
+const CartTotal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+
+  .total-text {
+    font-size: ${FONTSIZES.small};
+  }
+  .total-value {
+    font-size: ${FONTSIZES.base};
+    color: ${COLORS['cooper-crayola']};
+  }
+`;
+
+const CardInfoText = styled.p`
+  text-align: left;
+  font-size: ${FONTSIZES.small};
+  margin-top: 2.2rem;
 `;
 
 const CartItemWrapper = styled.div`
@@ -103,6 +157,7 @@ const CartItemWrapper = styled.div`
     color: ${COLORS.white};
   }
 `;
+
 const CartEmpty = styled.div`
   display: flex;
   justify-content: center;
