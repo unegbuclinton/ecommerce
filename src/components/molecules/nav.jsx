@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../../constants/fonts';
 import { DPIconCart, DPIconMenu } from '../../icons';
+import Cart from './Cart';
+import MenuDropDown from './MenuDropDown';
 
 const NavBar = () => {
-  return (
-    <Wrapper>
-      <div>
-        <DPIconMenu />
-      </div>
+  const [show, setShow] = useState(false);
+  const [cart, setCart] = useState(false);
 
-      <div>
-        <span>3</span>
-        <DPIconCart />
-      </div>
-    </Wrapper>
+  return (
+    <>
+      <CartMenu cart={cart}>
+        <Cart onClose={() => setCart(false)} />
+      </CartMenu>
+      <Wrapper>
+        <div>
+          <DPIconMenu onClick={() => setShow(true)} />
+        </div>
+
+        <div>
+          <span>3</span>
+          <DPIconCart onClick={() => setCart(true)} />
+        </div>
+      </Wrapper>
+      <DropDoenMenu show={show}>
+        <MenuDropDown onClose={() => setShow(false)} />
+      </DropDoenMenu>
+    </>
   );
 };
 
@@ -45,4 +58,24 @@ const Wrapper = styled.div`
       background-color: ${COLORS.auburn};
     }
   }
+`;
+
+const DropDoenMenu = styled.div`
+  position: fixed;
+  top: -5px;
+  left: 0;
+  height: ${({ show }) => (show ? '100vh' : '0')};
+  overflow: hidden;
+  z-index: 2;
+  transition: 0.4s ease-in-out;
+`;
+
+const CartMenu = styled.div`
+  position: absolute;
+  top: -5px;
+  left: 0;
+  transform: ${({ cart }) => (cart ? 'traslateX(0)' : 'translateX(-100%)')};
+  overflow: hidden;
+  z-index: 2;
+  transition: 0.4s ease-in-out;
 `;

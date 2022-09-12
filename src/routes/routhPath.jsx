@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import LoadingScreen from '../components/molecules/LoadState';
+import Cart from '../components/molecules/Cart';
 import LandingPage from '../pages/LandingPage';
 
 const routePaths = [
@@ -9,7 +9,11 @@ const routePaths = [
   },
   {
     path: '/test',
-    element: <LoadingScreen />,
+    element: <Cart />,
+  },
+  {
+    path: '*',
+    element: <div>No routes found</div>,
   },
   {
     path: 'dashboard/*',

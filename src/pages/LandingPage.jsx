@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../components/atoms/Button';
-import Layout from '../components/layout/layput';
+import Layout from '../components/layout/layout';
 import Carousel from '../components/molecules/Carousel';
 import LoadingScreen from '../components/molecules/LoadState';
 import OpenStore from '../components/molecules/OpenStore';
