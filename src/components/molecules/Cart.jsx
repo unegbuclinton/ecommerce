@@ -19,20 +19,26 @@ const Cart = ({ onClose }) => {
       <DPIconClose onClick={onClose} />
       <CartHeader>SHOPPING CART</CartHeader>
 
-      {dataItem?.map(({ price, image, title }) => (
-        <CartItemWrapper>
-          <CardItem img={image} />
-          <div className="right-item">
-            <h6 className="right-item__header">{title}</h6>
-            <div className="action-section">
-              <DPIconIncreaseIcon /> <span>1</span> <DPIconDecreaseIcon />
-            </div>
-            <p className="price-tag">{`$${price}`}</p>
+      {!!dataItem.length ? (
+        <>
+          {dataItem?.map(({ price, image, title }) => (
+            <CartItemWrapper>
+              <CardItem img={image} />
+              <div className="right-item">
+                <h6 className="right-item__header">{title}</h6>
+                <div className="action-section">
+                  <DPIconIncreaseIcon /> <span>1</span> <DPIconDecreaseIcon />
+                </div>
+                <p className="price-tag">{`$${price}`}</p>
 
-            <Button className="cart-btn">Remove</Button>
-          </div>
-        </CartItemWrapper>
-      ))}
+                <Button className="cart-btn">Remove</Button>
+              </div>
+            </CartItemWrapper>
+          ))}
+        </>
+      ) : (
+        <CartEmpty>You have no item in your shopping bag</CartEmpty>
+      )}
     </CartWrapper>
   );
 };
@@ -96,4 +102,13 @@ const CartItemWrapper = styled.div`
     border-radius: 0.3rem;
     color: ${COLORS.white};
   }
+`;
+const CartEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${FONTSIZES.xlarge};
+  font-weight: ${FONTWEIGHTS.bold};
+  text-align: center;
+  padding: 2rem;
 `;
