@@ -16,6 +16,7 @@ const Cart = ({ onClose }) => {
 
   return (
     <CartWrapper>
+      <CartEmpty></CartEmpty>
       <DPIconClose onClick={onClose} />
       <CartHeader>SHOPPING CART</CartHeader>
 
@@ -97,3 +98,4 @@ const CartItemWrapper = styled.div`
     color: ${COLORS.white};
   }
 `;
+const CartEmpty = styled.div``;
