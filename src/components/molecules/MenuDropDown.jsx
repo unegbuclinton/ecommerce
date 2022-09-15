@@ -34,7 +34,7 @@ const MenuDropDown = ({ onClose }) => {
       <DPIconClose onClick={onClose} />
       <MenuHeader>OPEN STORE</MenuHeader>
       {links.map(({ text, path }, idx) => (
-        <div className="link-wrapper">
+        <div className="link-wrapper" key={idx}>
           <Link to={path} className="menu-list">
             {text}
           </Link>

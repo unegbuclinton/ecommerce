@@ -23,7 +23,6 @@ const Cart = ({ onClose }) => {
       return value;
     });
   }, [dataItem]);
-  console.log(totalPrice);
   return (
     <CartWrapper>
       <CartEmpty></CartEmpty>
@@ -32,8 +31,8 @@ const Cart = ({ onClose }) => {
 
       {!!dataItem.length ? (
         <div className="cardItem-container">
-          {dataItem?.map(({ price, image, title }) => (
-            <CartItemWrapper>
+          {dataItem?.map(({ price, image, title }, idx) => (
+            <CartItemWrapper key={idx}>
               <CardItem img={image} />
               <div className="right-item">
                 <h6 className="right-item__header">{title}</h6>
@@ -56,7 +55,7 @@ const Cart = ({ onClose }) => {
         <p className="total-value">${totalPrice}</p>
       </CartTotal>
       <CardInfoText>
-        *shipping charges, taxes and discount codes  are calculated at the time
+        *shipping charges, taxes and discount codes are calculated at the time
         of accounting.
       </CardInfoText>
       <Button className="footer-btn">CHECK OUT</Button>

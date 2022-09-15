@@ -1,9 +1,12 @@
+export { ReactComponent as DPIconArrowDown } from './svgs/arrow-down.svg';
+export { ReactComponent as DPIconArrowUp } from './svgs/arrowup.svg';
 export { ReactComponent as DPIconCall } from './svgs/Call.svg';
 export { ReactComponent as DPIconCart } from './svgs/cart.svg';
 export { ReactComponent as DPIconClose } from './svgs/close.svg';
 export { ReactComponent as DPIconDecreaseIcon } from './svgs/Decrease.svg';
 export { ReactComponent as DPIconFast } from './svgs/fast.svg';
 export { ReactComponent as DPIconShipping } from './svgs/fastShip.svg';
+export { ReactComponent as DPIconFullView } from './svgs/full-view.svg';
 export { ReactComponent as DPIconIncreaseIcon } from './svgs/increase.svg';
 export { ReactComponent as DPIconLocation } from './svgs/Location.svg';
 export { ReactComponent as DPIconMenu } from './svgs/menu.svg';

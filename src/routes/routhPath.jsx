@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import Cart from '../components/molecules/Cart';
+import Category from '../pages/Category';
 import LandingPage from '../pages/LandingPage';
+import SingleItem from '../pages/SingleItem';
 
 const routePaths = [
   {
@@ -8,8 +9,12 @@ const routePaths = [
     element: <LandingPage />,
   },
   {
+    path: '/category',
+    element: <Category />,
+  },
+  {
     path: '/test',
-    element: <Cart />,
+    element: <SingleItem />,
   },
   {
     path: '*',
