@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/atoms/Button';
 import Layout from '../components/layout/layout';
@@ -13,6 +14,7 @@ import { DPIconThread } from '../icons';
 
 const LandingPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const LandingPage = () => {
 
   setTimeout(() => {
     setShow(true);
-  }, 2000);
+  }, 3500);
 
   return (
     <>
@@ -32,7 +34,12 @@ const LandingPage = () => {
           <Wrapper>
             <Carousel />
             <ButtonWrapper>
-              <Button className="page-btn">EXPLORE COLLECTION</Button>
+              <Button
+                className="page-btn"
+                onClick={() => navigate('/category')}
+              >
+                EXPLORE COLLECTION
+              </Button>
             </ButtonWrapper>
             <OpenStore />
             <div className="thread">
