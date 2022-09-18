@@ -33,25 +33,16 @@ const Cart = ({ onClose }) => {
 
       {!!cartItems?.length ? (
         <div className="cardItem-container">
-          {cartItems?.map(({ price, image, title, id }, idx) => (
-            <>
-              <CartCardItem img={image} title={title} id={id} price={price} />
-              {/* <CardItem img={image} />
-              <div className="right-item">
-                <h6 className="right-item__header">{title}</h6>
-                <div className="action-section">
-                  <DPIconIncreaseIcon /> <span>1</span> <DPIconDecreaseIcon />
-                </div>
-                <p className="price-tag">{`$${price}`}</p>
-
-                <Button
-                  className="cart-btn"
-                  onClick={() => dispatch(removeItem(id))}
-                >
-                  Remove
-                </Button>
-              </div> */}
-            </>
+          {cartItems?.map(({ price, image, title, id, num }, idx) => (
+            <div key={idx}>
+              <CartCardItem
+                img={image}
+                title={title}
+                id={id}
+                price={price}
+                num={num}
+              />
+            </div>
           ))}
         </div>
       ) : (
@@ -60,7 +51,7 @@ const Cart = ({ onClose }) => {
 
       <CartTotal>
         <p className="total-text">SUB TOTAL :</p>
-        <p className="total-value">${totalPrice}</p>
+        <p className="total-value">${totalPrice.toFixed(2)}</p>
       </CartTotal>
       <CardInfoText>
         *shipping charges, taxes and discount codes are calculated at the time
@@ -130,50 +121,6 @@ const CardInfoText = styled.p`
   font-size: ${FONTSIZES.small};
   margin-top: 2.2rem;
 `;
-
-// const CartItemWrapper = styled.div`
-//   display: flex;
-//   align-items: flex-end;
-//   gap: 1.4rem;
-//   margin-bottom: 4.7rem;
-
-//   /* .right-item {
-//     padding-right: 1.5rem;
-//     margin-top: 1rem;
-//     padding-bottom: 1rem;
-
-//     &__header {
-//       font-size: ${FONTSIZES.base};
-//       font-weight: ${FONTWEIGHTS.normal};
-//       margin-bottom: 1.8rem;
-//     }
-
-//     .action-section {
-//       display: flex;
-//       align-items: center;
-//       gap: 1.2rem;
-//       margin-bottom: 3.2rem;
-
-//       span {
-//         font-size: ${FONTSIZES.small};
-//       }
-//     }
-//   } */
-
-//   .price-tag {
-//     font-size: ${FONTSIZES.base};
-//     font-weight: ${FONTWEIGHTS.bold};
-//     margin-bottom: 3.9rem;
-//   }
-
-//   .cart-btn {
-//     background-color: ${COLORS.black};
-//     font-size: ${FONTSIZES.small};
-//     padding: 1.2rem 2.2rem;
-//     border-radius: 0.3rem;
-//     color: ${COLORS.white};
-//   }
-// `;
 
 const CartEmpty = styled.div`
   display: flex;

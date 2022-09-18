@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAllProducts } from '../api/allpproducts';
+import { getProductsByCategory } from '../api/category';
 
 const initialState = {
   isLoading: false,
@@ -9,6 +10,11 @@ const initialState = {
 export const allStoreProducts = createAsyncThunk(
   'category/getProducts',
   getAllProducts
+);
+
+export const getByCategory = createAsyncThunk(
+  'category/getCategory',
+  getProductsByCategory
 );
 
 export const categorySlice = createSlice({
@@ -24,6 +30,16 @@ export const categorySlice = createSlice({
       state.isLoading = false;
     },
     [allStoreProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getByCategory.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.allProducts = action.payload;
+    },
+    [getByCategory.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [getByCategory.pending]: (state) => {
       state.isLoading = true;
     },
   },

@@ -12,9 +12,7 @@ import { DPIconDecreaseIcon, DPIconIncreaseIcon } from '../../icons';
 import Button from '../atoms/Button';
 import CardItem from './CardItem';
 
-const CartCardItem = ({ img, title, price, id }) => {
-  //   const { cartItems } = useSelector((state) => state.addToCart);
-
+const CartCardItem = ({ img, title, price, num, id }) => {
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -23,7 +21,7 @@ const CartCardItem = ({ img, title, price, id }) => {
         <h6 className="right-item__header">{title}</h6>
         <div className="action-section">
           <DPIconIncreaseIcon onClick={() => dispatch(incrementValue(id))} />
-          <span>1</span>
+          <span>{num}</span>
           <DPIconDecreaseIcon onClick={() => dispatch(decrementValue(id))} />
         </div>
         <p className="price-tag">{`$${price}`}</p>

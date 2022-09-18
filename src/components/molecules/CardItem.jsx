@@ -40,6 +40,7 @@ const CardText = styled.p`
   font-size: ${FONTSIZES.small};
   font-weight: ${FONTWEIGHTS.normal};
   margin-bottom: 2.7rem;
+  overflow-wrap: break-word;
 `;
 
 const CardTextPrice = styled.p`
