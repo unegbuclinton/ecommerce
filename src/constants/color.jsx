@@ -5,6 +5,7 @@ export const COLORS = {
   auburn: '#9E3333',
   grey: 'rgb(85, 85, 85)',
   whitesmoke: '#F5f5f5',
+  'grey-scale': '#baa9a9',
   'border-color': '#D0BEBE',
   'cooper-crayola': '#DD8560',
 };

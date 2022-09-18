@@ -9,6 +9,7 @@ import DetailInfo from '../components/molecules/DetailInnfo';
 import { COLORS } from '../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
 import { addItem } from '../features/addToCart';
+import { addItemToWishList } from '../features/wishList';
 import { DPIconBack, DPIconFullView } from '../icons';
 
 const SingleItem = () => {
@@ -63,6 +64,12 @@ const SingleItem = () => {
         >
           Add To Cart
         </Button>
+        <Button
+          className="item-btn"
+          onClick={() => dispatch(addItemToWishList(productItem))}
+        >
+          Add To Wish List
+        </Button>
         <div className="care">
           <h3 className="care-header">Care</h3>
           <h3 className="care-text">
@@ -93,6 +100,7 @@ const Container = styled.div`
     border-radius: 0.4rem;
     font-size: ${FONTSIZES.base};
     font-weight: ${FONTWEIGHTS.medium};
+    margin-top: 3rem;
   }
 
   .care {

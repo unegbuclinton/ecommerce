@@ -1,8 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import OrderMsg from '../components/molecules/OrderMsg';
+import WishList from '../components/molecules/WishList';
+import Blog from '../pages/Blog';
 import Category from '../pages/Category';
 import Checkout from '../pages/Checkout';
 import LandingPage from '../pages/LandingPage';
+import NewArrival from '../pages/NewArrival';
 import SingleItem from '../pages/SingleItem';
 
 const routePaths = [
@@ -30,8 +32,30 @@ const routePaths = [
     element: <Checkout />,
   },
   {
+    path: '/new-arrival',
+    element: <NewArrival />,
+  },
+  {
+    path: '/blog',
+    element: <Blog />,
+  },
+  {
+    path: 'wish-list/*',
+    element: <Outlet />,
+    children: [
+      {
+        path: '/',
+        element: <WishList />,
+      },
+      {
+        path: ':id',
+        element: <SingleItem />,
+      },
+    ],
+  },
+  {
     path: '/test',
-    element: <OrderMsg />,
+    element: <Blog />,
   },
   {
     path: '*',

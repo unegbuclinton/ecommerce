@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { COLORS } from '../../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../../constants/fonts';
+import { clearState } from '../../features/addToCart';
 import {
   DPIconAngryEmoji,
   DPIconHappyEmoji,
@@ -12,8 +15,27 @@ import {
 import Button from '../atoms/Button';
 
 const OrderMsg = () => {
+  const [activeEmoji, setActiveEmoji] = useState(0);
+  const emojis = [
+    { icon: <DPIconHappyEmoji className="emoji-icon" /> },
+    { icon: <DPIconNotHapptEmoji className="emoji-icon" /> },
+    { icon: <DPIconAngryEmoji className="emoji-icon" /> },
+  ];
   const num = Math.floor(Math.random() * 90000) + 10000;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const orderWithFeedBackSucess = () => {
+    dispatch(clearState());
+    toast.success('Thank You for your feedback');
+    navigate('/category');
+  };
+
+  const orderWithoutFeedbackSucess = () => {
+    dispatch(clearState());
+    toast.success('Order placed successfully');
+    navigate('/category');
+  };
 
   return (
     <Wrapper>
@@ -24,16 +46,22 @@ const OrderMsg = () => {
 
       <p className="review">Rate your Purchase</p>
       <div className="emoji">
-        <DPIconHappyEmoji />
-        <DPIconNotHapptEmoji />
-        <DPIconAngryEmoji />
+        {emojis?.map(({ icon }, idx) => (
+          <EmojiWrapper
+            key={idx}
+            onClick={() => setActiveEmoji(idx)}
+            active={activeEmoji === idx}
+          >
+            {icon}
+          </EmojiWrapper>
+        ))}
       </div>
 
       <ButtonContainer>
-        <Button className="submit" onClick={() => navigate('/category')}>
+        <Button className="submit" onClick={orderWithFeedBackSucess}>
           SUBMIT
         </Button>
-        <Button className="home" onClick={() => navigate('/category')}>
+        <Button className="home" onClick={orderWithoutFeedbackSucess}>
           BACK TO HOME
         </Button>
       </ButtonContainer>
@@ -75,6 +103,16 @@ const MessageSubHeader = styled.h2`
   font-weight: ${FONTWEIGHTS.medium};
 `;
 
+const EmojiWrapper = styled.div`
+  .emoji-icon {
+    fill: #000;
+    ${({ active }) =>
+      active &&
+      css`
+        fill: #957207;
+      `};
+  }
+`;
 const MessageText = styled.p`
   padding-bottom: 2.3rem;
   border-bottom: 1px solid ${COLORS['border-color']};

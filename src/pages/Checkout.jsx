@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/atoms/Button';
 import Layout from '../components/layout/layout';
@@ -9,12 +9,14 @@ import CardItem from '../components/molecules/CardItem';
 import OrderMsg from '../components/molecules/OrderMsg';
 import { COLORS } from '../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
-import { DPIconDiscount } from '../icons';
+import { DPIconDelivery, DPIconDiscount } from '../icons';
 
 const Checkout = () => {
   const [open, setOpen] = useState(false);
-  const { dataItem } = useSelector((state) => state.landing);
+  const { cartItems } = useSelector((state) => state.addToCart);
+  const { state } = useLocation();
   const navigate = useNavigate();
+
   return (
     <Layout show>
       <Wrapper>
@@ -23,7 +25,7 @@ const Checkout = () => {
         </Modal>
         <CheckoutWrapper>
           <CheckoutHeader>CHECKOUT</CheckoutHeader>
-          {dataItem?.map(({ price, image, title }, idx) => (
+          {cartItems?.map(({ price, image, title }, idx) => (
             <CheckoutContainer key={idx}>
               <CardItem img={image} />
               <div className="right-item">
@@ -47,7 +49,7 @@ const Checkout = () => {
 
         <PromoCode>
           <div className="label">
-            <DPIconDiscount />
+            <DPIconDelivery />
             <h1>Delivery Method</h1>
           </div>
           <InputValue />
@@ -55,7 +57,7 @@ const Checkout = () => {
 
         <CheckoutTotal>
           <p className="total-text">EST TOTAL :</p>
-          <p className="total-value">{`$${dataItem[0].price}`}</p>
+          <p className="total-value">{`$${state.total.toFixed(2)}`}</p>
         </CheckoutTotal>
         <div className="btn-container">
           <Button className="revert-btn" onClick={() => navigate('/category')}>

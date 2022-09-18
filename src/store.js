@@ -13,6 +13,7 @@ import addToCartReducer from '../src/features/addToCart';
 import categoryReducer from '../src/features/category';
 import landingReducer from '../src/features/landingPageSlice/landingSlice';
 import productReducer from '../src/features/productSlice';
+import wishListReducer from '../src/features/wishList';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   addToCart: addToCartReducer,
   category: categoryReducer,
+  wishList: wishListReducer,
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

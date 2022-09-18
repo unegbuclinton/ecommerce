@@ -25,9 +25,10 @@ const MenuDropDown = ({ onClose }) => {
   ];
 
   const links = [
-    { text: 'BLOG', path: '/' },
-    { text: 'WISHLIST', path: '/' },
-    { text: 'NEW ARRIVAL', path: '/' },
+    { text: 'STORE', path: '/category' },
+    { text: 'BLOG', path: '/blog' },
+    { text: 'WISHLIST', path: '/wish-list' },
+    { text: 'NEW ARRIVAL', path: '/new-arrival' },
   ];
   return (
     <Wrapper>
