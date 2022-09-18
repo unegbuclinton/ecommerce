@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = ({ type, className, onClick, children }) => {
+const Button = ({ type, className, onClick, children, disabled }) => {
   return (
-    <ButtonTab type={type} className={className} onClick={onClick}>
+    <ButtonTab
+      type={type}
+      disabled={disabled}
+      className={className}
+      onClick={onClick}
+    >
       {children}
     </ButtonTab>
   );
