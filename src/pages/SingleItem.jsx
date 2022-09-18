@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/atoms/Button';
 import Layout from '../components/layout/layout';
-import CardItem from '../components/molecules/CardItem';
-import DetailInfo from '../components/molecules/DetailInnfo';
 import { COLORS } from '../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
 import { addItem } from '../features/addToCart';
@@ -70,6 +68,7 @@ const SingleItem = () => {
             health and quality standards for our products.
           </h3>
         </div>
+<<<<<<< HEAD
         {infoData?.map(({ text, header }, idx) => (
           <DetailInfo key={idx} text={text} header={header} />
         ))}
@@ -77,6 +76,21 @@ const SingleItem = () => {
         <Interest>
           <CardItem details img={image} title={title} price={`$${price}`} />
         </Interest>
+=======
+        <InfoWrapper>
+          <div className="info-wrapper__top">
+            <InfoHeader> Delivery </InfoHeader>
+            <DPIconArrow_up />
+          </div>
+
+          <InfoText>
+            Delivery Cost - $25.99 Ready for your delivery between 16 Sep & 20
+            Sep when you order within the next 24hrDelivery Cost - $25.99 Ready
+            for your delivery between 16 Sep & 20 Sep when you order within the
+            next 24hr
+          </InfoText>
+        </InfoWrapper>
+>>>>>>> 91dc1fe10c27dae785b4191d4ce6d49e52ade535
       </Container>
     </Layout>
   );
@@ -137,6 +151,14 @@ const SingleCardImg = styled.img`
   object-fit: cover;
   margin-bottom: 2rem;
 `;
+const InfoWrapper = styled.div`
+  position: relative;
+  margin-top: 2rem;
+`;
+const InfoHeader = styled.h1``;
+const InfoText = styled.p`
+  font-size: ${FONTSIZES.small};
+`;
 
 const ItemContainer = styled.div`
   display: flex;
@@ -160,6 +182,7 @@ const ItemContainer = styled.div`
     }
   }
 `;
+<<<<<<< HEAD
 
 const Interest = styled.div`
   display: grid;
@@ -173,3 +196,5 @@ const InterestHeader = styled.div`
   margin: 3rem 0;
   text-align: center;
 `;
+=======
+>>>>>>> 91dc1fe10c27dae785b4191d4ce6d49e52ade535

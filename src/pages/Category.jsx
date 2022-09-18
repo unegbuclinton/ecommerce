@@ -31,16 +31,6 @@ const Category = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const data = null;
-  const check = () => {
-    const v = data.some((item) => item.id === 1);
-    console.log(v);
-    if (v) {
-      console.log('present');
-    } else {
-      console.log('not found');
-    }
-  };
   return (
     <Layout>
       <CategoryHeader>OpenStore</CategoryHeader>
@@ -74,8 +64,6 @@ const Category = () => {
         totalPosts={allProducts?.length}
         paginate={paginate}
       />
-
-      <button onClick={() => check()}>Chech</button>
     </Layout>
   );
 };

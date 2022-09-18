@@ -4,7 +4,7 @@ export const getProducts = async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'https://fakestoreapi.com/products?limit=4',
+      url: 'https://fakestoreapi.com/products?limit=1',
     });
 
     return response.data;
