@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { COLORS } from '../../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../../constants/fonts';
@@ -20,6 +21,8 @@ const NavBar = () => {
   };
 
   window.addEventListener('scroll', ChangeNavbar);
+  const { cartItems } = useSelector((state) => state.addToCart);
+
   return (
     <>
       <CartMenu cart={cart}>
@@ -31,7 +34,7 @@ const NavBar = () => {
         </div>
 
         <div>
-          <span>3</span>
+          <span>{cartItems?.length}</span>
           <DPIconCart onClick={() => setCart(true)} />
         </div>
       </Wrapper>

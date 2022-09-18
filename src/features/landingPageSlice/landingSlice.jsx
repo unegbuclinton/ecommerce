@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getProducts } from '../../api/LandingPage';
+import { getProducts } from '../../api/LandingPage/index';
 
 const initialState = {
   isLoading: false,

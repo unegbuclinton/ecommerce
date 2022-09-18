@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { FONTSIZES, FONTWEIGHTS } from '../../constants/fonts';
 
-const CardItem = ({ details, img, title, price }) => {
+const CardItem = ({ details, img, title, price, onClick }) => {
   return (
-    <Card>
+    <Card onClick={onClick}>
       <CardImg src={img} />
       {details && (
         <>

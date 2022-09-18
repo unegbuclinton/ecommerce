@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import Footer from '../molecules/Footer';
 import NavBar from '../molecules/nav';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, show }) => {
   return (
     <LayoutWrapper>
       <NavBar />
       {children}
-      <Footer />
+      {!show && <Footer />}
     </LayoutWrapper>
   );
 };

@@ -1,17 +1,46 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from '../components/layout/layout';
+import Pagination from '../components/layout/pagination';
 import CardItem from '../components/molecules/CardItem';
 import CategoryMenu from '../components/molecules/CategoryMenu';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
+import { getSingleProduct } from '../features/productSlice';
 import { DPIconArrowDown } from '../icons';
 
 const Category = () => {
   const [category, setCategory] = useState('All');
-  const { dataItem } = useSelector((state) => state.landing);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(4);
 
+  const dispatch = useDispatch();
+
+  const { allProducts } = useSelector((state) => state.category);
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const singleProduct = (id) => {
+    dispatch(getSingleProduct(id));
+    navigate(`/category/${id}`);
+  };
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = allProducts?.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const data = null;
+  const check = () => {
+    const v = data.some((item) => item.id === 1);
+    console.log(v);
+    if (v) {
+      console.log('present');
+    } else {
+      console.log('not found');
+    }
+  };
   return (
     <Layout>
       <CategoryHeader>OpenStore</CategoryHeader>
@@ -28,10 +57,25 @@ const Category = () => {
         </CategoryMenuWrapper>
       </CategorySort>
       <CardItemContainer>
-        {dataItem?.map(({ image, price, title }) => (
-          <CardItem details img={image} title={title} price={`$${price}`} />
+        {currentPosts?.map(({ image, price, title, id }, idx) => (
+          <CardItem
+            key={idx}
+            details
+            img={image}
+            title={title}
+            price={`$${price}`}
+            onClick={() => singleProduct(id)}
+          />
         ))}
       </CardItemContainer>
+
+      <Pagination
+        postPerPage={postPerPage}
+        totalPosts={allProducts?.length}
+        paginate={paginate}
+      />
+
+      <button onClick={() => check()}>Chech</button>
     </Layout>
   );
 };

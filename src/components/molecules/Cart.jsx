@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../../constants/fonts';
+import { removeItem } from '../../features/addToCart';
 import {
   DPIconClose,
   DPIconDecreaseIcon,
@@ -13,25 +15,28 @@ import CardItem from './CardItem';
 
 const Cart = ({ onClose }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const { dataItem } = useSelector((state) => state.landing);
+  const { cartItems } = useSelector((state) => state.addToCart);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     var value = 0;
-    dataItem?.map(({ price }) => {
+    cartItems?.map(({ price }) => {
       value += price;
       setTotalPrice(value);
       return value;
     });
-  }, [dataItem]);
+  }, [cartItems]);
   return (
     <CartWrapper>
       <CartEmpty></CartEmpty>
       <DPIconClose onClick={onClose} />
       <CartHeader>SHOPPING CART</CartHeader>
 
-      {!!dataItem.length ? (
+      {!!cartItems?.length ? (
         <div className="cardItem-container">
-          {dataItem?.map(({ price, image, title }, idx) => (
+          {cartItems?.map(({ price, image, title, id }, idx) => (
             <CartItemWrapper key={idx}>
               <CardItem img={image} />
               <div className="right-item">
@@ -41,7 +46,12 @@ const Cart = ({ onClose }) => {
                 </div>
                 <p className="price-tag">{`$${price}`}</p>
 
-                <Button className="cart-btn">Remove</Button>
+                <Button
+                  className="cart-btn"
+                  onClick={() => dispatch(removeItem(id))}
+                >
+                  Remove
+                </Button>
               </div>
             </CartItemWrapper>
           ))}
@@ -58,7 +68,9 @@ const Cart = ({ onClose }) => {
         *shipping charges, taxes and discount codes are calculated at the time
         of accounting.
       </CardInfoText>
-      <Button className="footer-btn">CHECK OUT</Button>
+      <Button className="footer-btn" onClick={() => navigate('/checkout')}>
+        CHECK OUT
+      </Button>
     </CartWrapper>
   );
 };
@@ -66,7 +78,7 @@ const Cart = ({ onClose }) => {
 export default Cart;
 
 const CartWrapper = styled.div`
-  height: 100vh;
+  height: 102vh;
   background-color: ${COLORS.white};
   padding: 2.2rem 1rem 2.7rem 1rem;
   overflow: auto;

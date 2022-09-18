@@ -11,7 +11,7 @@ const Carousel = () => {
     setTimeout(
       () =>
         setIndex((prevIndex) =>
-          prevIndex === dataItem.length - 1 ? 0 : prevIndex + 1
+          prevIndex === dataItem?.length - 1 ? 0 : prevIndex + 1
         ),
       delay
     );

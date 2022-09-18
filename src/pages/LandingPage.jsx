@@ -9,6 +9,7 @@ import LoadingScreen from '../components/molecules/LoadState';
 import OpenStore from '../components/molecules/OpenStore';
 import SocialMedia from '../components/molecules/SocialMedia';
 import { FONTSIZES } from '../constants/fonts';
+import { allStoreProducts } from '../features/category';
 import { getSomeProducts } from '../features/landingPageSlice/landingSlice';
 import { DPIconThread } from '../icons';
 
@@ -19,6 +20,7 @@ const LandingPage = () => {
 
   useEffect(() => {
     dispatch(getSomeProducts());
+    dispatch(allStoreProducts());
   }, [dispatch]);
 
   setTimeout(() => {

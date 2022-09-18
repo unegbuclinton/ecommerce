@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/atoms/Button';
 import Layout from '../components/layout/layout';
@@ -7,13 +8,15 @@ import CardItem from '../components/molecules/CardItem';
 import DetailInfo from '../components/molecules/DetailInnfo';
 import { COLORS } from '../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
-import { DPIconFullView } from '../icons';
+import { addItem } from '../features/addToCart';
+import { DPIconBack, DPIconFullView } from '../icons';
 
 const SingleItem = () => {
+  const navigate = useNavigate();
   const infoData = [
     {
       header: 'Delivery',
-      text: '   Delivery Cost - $25.99 Ready for your delivery between 16 Sep & 20 Sep when you order within the next 24hrDelivery Cost - $25.99 Ready for your delivery between 16 Sep & 20 Sep when you order within the next 24hr',
+      text: `Delivery Cost - $25.99 Ready for your delivery between 16 Sep & 20 Sep when you order within the next 24hrDelivery Cost - $25.99 Ready for your delivery between 16 Sep & 20 Sep when you order within the next 24hr`,
     },
     {
       header: 'Pickup Station',
@@ -24,11 +27,17 @@ const SingleItem = () => {
       text: '  Free return within 15 days for official Store item and 7 days for other eligiblle items',
     },
   ];
-  const { dataItem } = useSelector((state) => state.landing);
+  const { productItem } = useSelector((state) => state.product);
 
-  const { title, price, image, description, rating } = dataItem[0];
+  const { title, price, image, description, rating } = productItem;
+  const dispatch = useDispatch();
+
   return (
     <Layout>
+      <DPIconBack
+        style={{ margin: '2rem 0' }}
+        onClick={() => navigate('/category')}
+      />
       <Container>
         <Card>
           <SingleCardImg src={image} />
@@ -48,7 +57,12 @@ const SingleItem = () => {
           </div>
         </ItemContainer>
 
-        <Button className="item-btn">Add To Cart</Button>
+        <Button
+          className="item-btn"
+          onClick={() => dispatch(addItem(productItem))}
+        >
+          Add To Cart
+        </Button>
         <div className="care">
           <h3 className="care-header">Care</h3>
           <h3 className="care-text">
@@ -56,15 +70,12 @@ const SingleItem = () => {
             health and quality standards for our products.
           </h3>
         </div>
-        {infoData?.map(({ text, header }) => (
-          <DetailInfo text={text} header={header} />
+        {infoData?.map(({ text, header }, idx) => (
+          <DetailInfo key={idx} text={text} header={header} />
         ))}
-
+        <InterestHeader> You may also like </InterestHeader>
         <Interest>
-          <InterestHeader> You may also like </InterestHeader>
-          {dataItem?.map(({ image, price, title }) => (
-            <CardItem details img={image} title={title} price={`$${price}`} />
-          ))}
+          <CardItem details img={image} title={title} price={`$${price}`} />
         </Interest>
       </Container>
     </Layout>
@@ -151,12 +162,14 @@ const ItemContainer = styled.div`
 `;
 
 const Interest = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-top: 1.6rem;
   margin-bottom: 4rem;
 `;
 
 const InterestHeader = styled.div`
   font-size: ${FONTSIZES.xxlarge};
-  margin-bottom: 2rem;
+  margin: 3rem 0;
   text-align: center;
 `;
