@@ -39,11 +39,19 @@ export const addToCartSlice = createSlice({
         return;
       }
     },
+    clearState: (state) => {
+      state.cartItems = [];
+    },
   },
 
   extraReducers: {},
 });
 
-export const { addItem, removeItem, incrementValue, decrementValue } =
-  addToCartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  incrementValue,
+  decrementValue,
+  clearState,
+} = addToCartSlice.actions;
 export default addToCartSlice.reducer;

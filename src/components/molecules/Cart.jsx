@@ -60,7 +60,7 @@ const Cart = ({ onClose }) => {
       <Button
         disabled={active}
         className={`footer-btn ${active ? 'disabled' : ''} `}
-        onClick={() => navigate('/checkout')}
+        onClick={() => navigate('/checkout', { state: { total: totalPrice } })}
       >
         CHECK OUT
       </Button>

@@ -63,6 +63,12 @@ const SingleItem = () => {
         >
           Add To Cart
         </Button>
+        <Button
+          className="item-btn"
+          onClick={() => dispatch(addItem(productItem))}
+        >
+          Add To Wish List
+        </Button>
         <div className="care">
           <h3 className="care-header">Care</h3>
           <h3 className="care-text">
@@ -93,6 +99,7 @@ const Container = styled.div`
     border-radius: 0.4rem;
     font-size: ${FONTSIZES.base};
     font-weight: ${FONTWEIGHTS.medium};
+    margin-top: 3rem;
   }
 
   .care {

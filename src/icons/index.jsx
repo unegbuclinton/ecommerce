@@ -6,6 +6,7 @@ export { ReactComponent as DPIconCall } from './svgs/Call.svg';
 export { ReactComponent as DPIconCart } from './svgs/cart.svg';
 export { ReactComponent as DPIconClose } from './svgs/close.svg';
 export { ReactComponent as DPIconDecreaseIcon } from './svgs/Decrease.svg';
+export { ReactComponent as DPIconDelivery } from './svgs/delivery.svg';
 export { ReactComponent as DPIconDiscount } from './svgs/discount.svg';
 export { ReactComponent as DPIconFast } from './svgs/fast.svg';
 export { ReactComponent as DPIconShipping } from './svgs/fastShip.svg';
