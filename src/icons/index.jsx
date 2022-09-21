@@ -9,6 +9,7 @@ export { ReactComponent as DPIconClose } from './svgs/close.svg';
 export { ReactComponent as DPIconDecreaseIcon } from './svgs/Decrease.svg';
 export { ReactComponent as DPIconDelivery } from './svgs/delivery.svg';
 export { ReactComponent as DPIconDiscount } from './svgs/discount.svg';
+export { ReactComponent as DPIconDown } from './svgs/down.svg';
 export { ReactComponent as DPIconFast } from './svgs/fast.svg';
 export { ReactComponent as DPIconShipping } from './svgs/fastShip.svg';
 export { ReactComponent as DPIconFullView } from './svgs/full-view.svg';
