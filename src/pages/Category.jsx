@@ -13,7 +13,7 @@ import { DPIconArrowDown } from '../icons';
 const Category = () => {
   const [category, setCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(4);
+  const [postPerPage] = useState(8);
 
   const dispatch = useDispatch();
 
@@ -102,6 +102,11 @@ const CategoryMenuWrapper = styled.div`
 const CardItemContainer = styled.div`
   display: grid;
   gap: 1.3rem;
-  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  grid-template-columns: auto auto;
   margin-bottom: 7.5rem;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 `;

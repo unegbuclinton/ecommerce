@@ -22,12 +22,15 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: end;
-  max-width: 14.5rem;
   min-width: 14.5rem;
   min-height: 22.4rem;
   padding: 3rem 1.35rem 1.6rem 1.35rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  @media only screen and (min-width: 768px) {
+    max-width: 18.5rem;
+  }
 `;
 
 const CardImg = styled.img`

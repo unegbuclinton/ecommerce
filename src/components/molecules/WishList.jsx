@@ -49,7 +49,12 @@ const WishlistHeader = styled.div`
 const WIshListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-content: center;
   margin-bottom: 7.5rem;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 `;
 const WishListEmpty = styled.div`
   display: flex;

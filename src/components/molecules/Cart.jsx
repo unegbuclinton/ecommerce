@@ -75,6 +75,7 @@ const CartWrapper = styled.div`
   background-color: ${COLORS.white};
   padding: 2.2rem 1rem 2.7rem 1rem;
   overflow: auto;
+  z-index: 5;
 
   .cardItem-container {
     border-bottom: 1px solid ${COLORS['border-color']};
@@ -92,6 +93,9 @@ const CartWrapper = styled.div`
   }
   .disabled {
     background-color: ${COLORS.grey};
+  }
+
+  @media only screen and (min-width: 768px) {
   }
 `;
 

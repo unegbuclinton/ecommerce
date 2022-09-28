@@ -58,18 +58,20 @@ const SingleItem = () => {
           </div>
         </ItemContainer>
 
-        <Button
-          className="item-btn"
-          onClick={() => dispatch(addItem(productItem))}
-        >
-          Add To Cart
-        </Button>
-        <Button
-          className="item-btn"
-          onClick={() => dispatch(addItemToWishList(productItem))}
-        >
-          Add To Wish List
-        </Button>
+        <div className="single-btns">
+          <Button
+            className="item-btn"
+            onClick={() => dispatch(addItem(productItem))}
+          >
+            Add To Cart
+          </Button>
+          <Button
+            className="item-btn"
+            onClick={() => dispatch(addItemToWishList(productItem))}
+          >
+            Add To Wish List
+          </Button>
+        </div>
         <div className="care">
           <h3 className="care-header">Care</h3>
           <h3 className="care-text">
@@ -101,6 +103,11 @@ const Container = styled.div`
     font-size: ${FONTSIZES.base};
     font-weight: ${FONTWEIGHTS.medium};
     margin-top: 3rem;
+
+    &:hover {
+      background-color: ${COLORS.white};
+      color: ${COLORS.black};
+    }
   }
 
   .care {
@@ -116,6 +123,13 @@ const Container = styled.div`
       font-weight: ${FONTWEIGHTS.normal};
     }
   }
+
+  @media only screen and (min-width: 1024px) {
+    .single-btns {
+      display: flex;
+      gap: 2rem;
+    }
+  }
 `;
 const Card = styled.div`
   position: relative;
@@ -128,6 +142,11 @@ const Card = styled.div`
     position: absolute;
     bottom: 10px;
     right: 10px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    max-width: 40rem;
+    margin: 4.5rem auto;
   }
 `;
 

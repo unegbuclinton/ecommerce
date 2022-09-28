@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import SideBar from '../components/molecules/SideBar';
 import WishList from '../components/molecules/WishList';
 import Blog from '../pages/Blog';
 import Category from '../pages/Category';
@@ -55,7 +56,7 @@ const routePaths = [
   },
   {
     path: '/test',
-    element: <Blog />,
+    element: <SideBar />,
   },
   {
     path: '*',

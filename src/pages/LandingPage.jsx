@@ -8,7 +8,7 @@ import Carousel from '../components/molecules/Carousel';
 import LoadingScreen from '../components/molecules/LoadState';
 import OpenStore from '../components/molecules/OpenStore';
 import SocialMedia from '../components/molecules/SocialMedia';
-import { FONTSIZES } from '../constants/fonts';
+import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
 import { allStoreProducts } from '../features/category';
 import { getSomeProducts } from '../features/landingPageSlice/landingSlice';
 import { DPIconDown, DPIconThread } from '../icons';
@@ -105,5 +105,6 @@ const ButtonWrapper = styled.div`
     border-radius: 3rem;
     backdrop-filter: blur(4px);
     font-size: ${FONTSIZES.base};
+    font-weight: ${FONTWEIGHTS.bold};
   }
 `;

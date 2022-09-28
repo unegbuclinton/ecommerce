@@ -19,4 +19,5 @@ export default Button;
 const ButtonTab = styled.button`
   outline: none;
   border: none;
+  cursor: pointer;
 `;

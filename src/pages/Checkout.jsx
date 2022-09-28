@@ -17,6 +17,8 @@ const Checkout = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
+  const activeBtn = cartItems.length <= 0;
+
   return (
     <Layout show>
       <Wrapper>
@@ -25,18 +27,25 @@ const Checkout = () => {
         </Modal>
         <CheckoutWrapper>
           <CheckoutHeader>CHECKOUT</CheckoutHeader>
-          {cartItems?.map(({ price, image, title }, idx) => (
-            <CheckoutContainer key={idx}>
-              <CardItem img={image} />
-              <div className="right-item">
-                <h6 className="right-item__header">{title}</h6>
 
-                <p className="price-tag">{`$${price}`}</p>
+          {!!cartItems?.length ? (
+            <div>
+              {cartItems?.map(({ price, image, title }, idx) => (
+                <CheckoutContainer key={idx}>
+                  <CardItem img={image} />
+                  <div className="right-item">
+                    <h6 className="right-item__header">{title}</h6>
 
-                <Button className="cart-btn">Remove</Button>
-              </div>
-            </CheckoutContainer>
-          ))}
+                    <p className="price-tag">{`$${price}`}</p>
+
+                    <Button className="cart-btn">Remove</Button>
+                  </div>
+                </CheckoutContainer>
+              ))}
+            </div>
+          ) : (
+            <CheckoutEmpty>You have no item in your shopping bag</CheckoutEmpty>
+          )}
         </CheckoutWrapper>
 
         <PromoCode>
@@ -63,7 +72,11 @@ const Checkout = () => {
           <Button className="revert-btn" onClick={() => navigate('/category')}>
             Cancel Order
           </Button>
-          <Button className="order-btn" onClick={() => setOpen(true)}>
+          <Button
+            disabled={activeBtn}
+            className="order-btn"
+            onClick={() => setOpen(true)}
+          >
             Place Order
           </Button>
         </div>
@@ -75,6 +88,8 @@ const Checkout = () => {
 export default Checkout;
 
 const Wrapper = styled.div`
+  width: 100%;
+
   .btn-container {
     display: flex;
     flex-direction: column;
@@ -143,6 +158,12 @@ const CheckoutContainer = styled.div`
     border-radius: 0.3rem;
     color: ${COLORS.white};
   }
+
+  @media only screen and (min-width: 768px) {
+    .right-item {
+      max-width: 280px;
+    }
+  }
 `;
 
 const PromoCode = styled.div`
@@ -182,4 +203,13 @@ const CheckoutTotal = styled.div`
     color: ${COLORS['cooper-crayola']};
     font-weight: ${FONTWEIGHTS.bold};
   }
+`;
+const CheckoutEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${FONTSIZES.xlarge};
+  font-weight: ${FONTWEIGHTS.bold};
+  text-align: center;
+  padding: 2rem;
 `;

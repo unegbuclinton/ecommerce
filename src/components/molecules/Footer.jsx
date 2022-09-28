@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { COLORS } from '../../constants/color';
 import { FONTSIZES } from '../../constants/fonts';
 import { DPIconSocials } from '../../icons';
 
@@ -13,9 +15,9 @@ const Footer = () => {
         support@openui.design +60 825 876 08:00 - 22:00 - Everyday
       </p>
       <FooterContainer>
-        <FooterText>About</FooterText>
-        <FooterText>Contact</FooterText>
-        <FooterText>Blog</FooterText>
+        <FooterText to="blog">About</FooterText>
+        <FooterText to="/blog">Contact</FooterText>
+        <FooterText to="/blog">Blog</FooterText>
       </FooterContainer>
     </Wrapper>
   );
@@ -51,6 +53,8 @@ const FooterContainer = styled.div`
   margin-top: 3.2rem;
 `;
 
-const FooterText = styled.p`
+const FooterText = styled(Link)`
   font-size: ${FONTSIZES.xxlarge};
+  text-decoration: none;
+  color: ${COLORS['cooper-crayola']};
 `;

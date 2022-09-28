@@ -60,4 +60,8 @@ const BlogImg = styled.div`
     opacity: 0.9;
     z-index: -1;
   }
+
+  @media only screen and (min-width: 768px) {
+    background-position: top center;
+  }
 `;

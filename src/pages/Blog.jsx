@@ -19,8 +19,10 @@ const Blog = () => {
     <Layout>
       <BlogHeader>Blog</BlogHeader>
       <BlogButtonWrapper>
-        {categories?.map(({ title }) => (
-          <Button className="blog-btn">{title}</Button>
+        {categories?.map(({ title }, idx) => (
+          <Button className="blog-btn" key={idx}>
+            {title}
+          </Button>
         ))}
       </BlogButtonWrapper>
 

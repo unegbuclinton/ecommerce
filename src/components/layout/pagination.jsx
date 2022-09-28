@@ -32,7 +32,7 @@ export default Pagination;
 
 const PaginationWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 15rem;
 `;
