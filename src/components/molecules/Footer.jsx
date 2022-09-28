@@ -26,8 +26,6 @@ const Footer = () => {
 export default Footer;
 
 const Wrapper = styled.div`
-  /* position: absolute;
-  bottom: 0; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,4 +55,8 @@ const FooterText = styled(Link)`
   font-size: ${FONTSIZES.xxlarge};
   text-decoration: none;
   color: ${COLORS['cooper-crayola']};
+
+  &:hover {
+    color: #835542;
+  }
 `;

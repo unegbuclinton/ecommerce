@@ -36,7 +36,7 @@ const SingleItem = () => {
   return (
     <Layout>
       <DPIconBack
-        style={{ margin: '2rem 0' }}
+        style={{ margin: '2rem 0', cursor: 'pointer' }}
         onClick={() => navigate('/category')}
       />
       <Container>

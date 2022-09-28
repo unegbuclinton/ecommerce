@@ -44,6 +44,7 @@ const PaginationButton = styled.div`
   font-size: ${FONTSIZES.xsmall};
   border: 1px solid ${COLORS.black};
   font-weight: ${FONTWEIGHTS.medium};
+  cursor: pointer;
 
   ${({ active }) =>
     active &&
