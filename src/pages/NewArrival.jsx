@@ -25,5 +25,6 @@ const Wrapper = styled.div`
 
   p {
     font-size: ${FONTSIZES.lg};
+    font-weight: 700;
   }
 `;
