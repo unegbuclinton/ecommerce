@@ -4,11 +4,12 @@
 
 # Table of Content
 
-- General Info
-- Technologies
-- Status
+- [General Info](#general-info)
 
-### Introduction
+* Technologies
+* Status
+
+## General Info
 
 An E-commerce application that gives user room to purchase their desired product, and also add product to wish-list for future order.
 
