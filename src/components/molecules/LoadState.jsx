@@ -15,6 +15,7 @@ const LoadingScreen = () => {
 
   return (
     <Wrapper>
+      <Header>OPEN STORE</Header>
       <Text>{`${num} %`}</Text>
       <ProgressWrapper>
         <ProgressColor />
@@ -38,6 +39,14 @@ const Text = styled.p`
   color: ${COLORS.white};
   font-weight: ${FONTWEIGHTS.bold};
   margin-bottom: 1.5rem;
+`;
+
+const Header = styled.h1`
+  position: absolute;
+  top: 50px;
+  text-align: center;
+  font-size: ${FONTSIZES.xlarge};
+  color: ${COLORS.white};
 `;
 const ProgressWrapper = styled.div`
   position: relative;

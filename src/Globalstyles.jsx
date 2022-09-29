@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         color: inherit;
+        /* overflow: hidden; */
     }
     ::-webkit-scrollbar-thumb {
    

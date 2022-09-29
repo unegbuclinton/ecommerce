@@ -1,49 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { COLORS } from '../../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../../constants/fonts';
-import {
-  DPIconClose,
-  DPIconDecreaseIcon,
-  DPIconIncreaseIcon,
-} from '../../icons';
+import { DPIconClose } from '../../icons';
 import Button from '../atoms/Button';
-import CardItem from './CardItem';
+import CartCardItem from './CartCardItem';
 
 const Cart = ({ onClose }) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const { dataItem } = useSelector((state) => state.landing);
+  const { cartItems } = useSelector((state) => state.addToCart);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     var value = 0;
-    dataItem?.map(({ price }) => {
-      value += price;
+    cartItems?.map(({ price, num }) => {
+      value += price * num;
       setTotalPrice(value);
       return value;
     });
-  }, [dataItem]);
+  }, [cartItems]);
+
+  const active = cartItems?.length <= 0;
+
   return (
     <CartWrapper>
       <CartEmpty></CartEmpty>
       <DPIconClose onClick={onClose} />
       <CartHeader>SHOPPING CART</CartHeader>
 
-      {!!dataItem.length ? (
+      {!!cartItems?.length ? (
         <div className="cardItem-container">
-          {dataItem?.map(({ price, image, title }, idx) => (
-            <CartItemWrapper key={idx}>
-              <CardItem img={image} />
-              <div className="right-item">
-                <h6 className="right-item__header">{title}</h6>
-                <div className="action-section">
-                  <DPIconIncreaseIcon /> <span>1</span> <DPIconDecreaseIcon />
-                </div>
-                <p className="price-tag">{`$${price}`}</p>
-
-                <Button className="cart-btn">Remove</Button>
-              </div>
-            </CartItemWrapper>
+          {cartItems?.map(({ price, image, title, id, num }, idx) => (
+            <div key={idx}>
+              <CartCardItem
+                img={image}
+                title={title}
+                id={id}
+                price={price}
+                num={num}
+              />
+            </div>
           ))}
         </div>
       ) : (
@@ -52,13 +51,19 @@ const Cart = ({ onClose }) => {
 
       <CartTotal>
         <p className="total-text">SUB TOTAL :</p>
-        <p className="total-value">${totalPrice}</p>
+        <p className="total-value">${totalPrice.toFixed(2)}</p>
       </CartTotal>
       <CardInfoText>
         *shipping charges, taxes and discount codes are calculated at the time
         of accounting.
       </CardInfoText>
-      <Button className="footer-btn">CHECK OUT</Button>
+      <Button
+        disabled={active}
+        className={`footer-btn ${active ? 'disabled' : ''} `}
+        onClick={() => navigate('/checkout', { state: { total: totalPrice } })}
+      >
+        CHECK OUT
+      </Button>
     </CartWrapper>
   );
 };
@@ -66,10 +71,11 @@ const Cart = ({ onClose }) => {
 export default Cart;
 
 const CartWrapper = styled.div`
-  height: 100vh;
+  height: 102vh;
   background-color: ${COLORS.white};
   padding: 2.2rem 1rem 2.7rem 1rem;
   overflow: auto;
+  z-index: 5;
 
   .cardItem-container {
     border-bottom: 1px solid ${COLORS['border-color']};
@@ -84,6 +90,12 @@ const CartWrapper = styled.div`
     font-weight: ${FONTWEIGHTS.bold};
     color: ${COLORS.white};
     margin-top: 2rem;
+  }
+  .disabled {
+    background-color: ${COLORS.grey};
+  }
+
+  @media only screen and (min-width: 768px) {
   }
 `;
 
@@ -112,50 +124,6 @@ const CardInfoText = styled.p`
   text-align: left;
   font-size: ${FONTSIZES.small};
   margin-top: 2.2rem;
-`;
-
-const CartItemWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 1.4rem;
-  margin-bottom: 4.7rem;
-
-  .right-item {
-    padding-right: 1.5rem;
-    margin-top: 1rem;
-    padding-bottom: 1rem;
-
-    &__header {
-      font-size: ${FONTSIZES.base};
-      font-weight: ${FONTWEIGHTS.normal};
-      margin-bottom: 1.8rem;
-    }
-
-    .action-section {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      margin-bottom: 3.2rem;
-
-      span {
-        font-size: ${FONTSIZES.small};
-      }
-    }
-  }
-
-  .price-tag {
-    font-size: ${FONTSIZES.base};
-    font-weight: ${FONTWEIGHTS.bold};
-    margin-bottom: 3.9rem;
-  }
-
-  .cart-btn {
-    background-color: ${COLORS.black};
-    font-size: ${FONTSIZES.small};
-    padding: 1.2rem 2.2rem;
-    border-radius: 0.3rem;
-    color: ${COLORS.white};
-  }
 `;
 
 const CartEmpty = styled.div`

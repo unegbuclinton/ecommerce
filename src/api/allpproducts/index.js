@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-export const getProducts = async () => {
+export const getAllProducts = async () => {
   try {
     const response = await axios({
       method: 'get',
-      url: 'https://fakestoreapi.com/products?limit=5',
+      url: 'https://fakestoreapi.com/products',
     });
 
     return response.data;

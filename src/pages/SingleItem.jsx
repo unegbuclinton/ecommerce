@@ -1,18 +1,44 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/atoms/Button';
 import Layout from '../components/layout/layout';
+import CardItem from '../components/molecules/CardItem';
+import DetailInfo from '../components/molecules/DetailInnfo';
 import { COLORS } from '../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
-import { DPIconArrow_up, DPIconFullView } from '../icons';
+import { addItem } from '../features/addToCart';
+import { addItemToWishList } from '../features/wishList';
+import { DPIconBack, DPIconFullView } from '../icons';
 
 const SingleItem = () => {
-  const { dataItem } = useSelector((state) => state.landing);
+  const navigate = useNavigate();
+  const infoData = [
+    {
+      header: 'Delivery',
+      text: `Delivery Cost - $25.99 Ready for your delivery between 16 Sep & 20 Sep when you order within the next 24hrDelivery Cost - $25.99 Ready for your delivery between 16 Sep & 20 Sep when you order within the next 24hr`,
+    },
+    {
+      header: 'Pickup Station',
+      text: '  Delivery Cost - $15.99 Ready for your pickup between 16 Sep & 20 Sep when you order within the next 24hr',
+    },
+    {
+      header: 'Return Policy',
+      text: '  Free return within 15 days for official Store item and 7 days for other eligiblle items',
+    },
+  ];
+  const { productItem } = useSelector((state) => state.product);
 
-  const { title, price, image, description, rating } = dataItem[0];
+  const { title, price, image, description, rating } = productItem;
+  const dispatch = useDispatch();
+
   return (
     <Layout>
+      <DPIconBack
+        style={{ margin: '2rem 0', cursor: 'pointer' }}
+        onClick={() => navigate('/category')}
+      />
       <Container>
         <Card>
           <SingleCardImg src={image} />
@@ -32,7 +58,20 @@ const SingleItem = () => {
           </div>
         </ItemContainer>
 
-        <Button className="item-btn">Add To Cart</Button>
+        <div className="single-btns">
+          <Button
+            className="item-btn"
+            onClick={() => dispatch(addItem(productItem))}
+          >
+            Add To Cart
+          </Button>
+          <Button
+            className="item-btn"
+            onClick={() => dispatch(addItemToWishList(productItem))}
+          >
+            Add To Wish List
+          </Button>
+        </div>
         <div className="care">
           <h3 className="care-header">Care</h3>
           <h3 className="care-text">
@@ -40,19 +79,13 @@ const SingleItem = () => {
             health and quality standards for our products.
           </h3>
         </div>
-        <InfoWrapper>
-          <div className="info-wrapper__top">
-            <InfoHeader> Delivery </InfoHeader>
-            <DPIconArrow_up />
-          </div>
-
-          <InfoText>
-            Delivery Cost - $25.99 Ready for your delivery between 16 Sep & 20
-            Sep when you order within the next 24hrDelivery Cost - $25.99 Ready
-            for your delivery between 16 Sep & 20 Sep when you order within the
-            next 24hr
-          </InfoText>
-        </InfoWrapper>
+        {infoData?.map(({ text, header }, idx) => (
+          <DetailInfo key={idx} text={text} header={header} />
+        ))}
+        <InterestHeader> You may also like </InterestHeader>
+        <Interest>
+          <CardItem details img={image} title={title} price={`$${price}`} />
+        </Interest>
       </Container>
     </Layout>
   );
@@ -69,10 +102,17 @@ const Container = styled.div`
     border-radius: 0.4rem;
     font-size: ${FONTSIZES.base};
     font-weight: ${FONTWEIGHTS.medium};
+    margin-top: 3rem;
+
+    &:hover {
+      background-color: ${COLORS.white};
+      color: ${COLORS.black};
+    }
   }
 
   .care {
     margin-top: 5.6rem;
+    margin-bottom: 1.5rem;
     &-header {
       font-size: ${FONTSIZES.small};
       font-weight: ${FONTWEIGHTS.bold};
@@ -81,6 +121,13 @@ const Container = styled.div`
     &-text {
       font-size: ${FONTSIZES.small};
       font-weight: ${FONTWEIGHTS.normal};
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .single-btns {
+      display: flex;
+      gap: 2rem;
     }
   }
 `;
@@ -95,6 +142,11 @@ const Card = styled.div`
     position: absolute;
     bottom: 10px;
     right: 10px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    max-width: 40rem;
+    margin: 4.5rem auto;
   }
 `;
 
@@ -112,14 +164,6 @@ const SingleCardImg = styled.img`
   width: 100%;
   object-fit: cover;
   margin-bottom: 2rem;
-`;
-const InfoWrapper = styled.div`
-  position: relative;
-  margin-top: 2rem;
-`;
-const InfoHeader = styled.h1``;
-const InfoText = styled.p`
-  font-size: ${FONTSIZES.small};
 `;
 
 const ItemContainer = styled.div`
@@ -143,4 +187,17 @@ const ItemContainer = styled.div`
       color: ${COLORS.auburn};
     }
   }
+`;
+
+const Interest = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1.6rem;
+  margin-bottom: 4rem;
+`;
+
+const InterestHeader = styled.div`
+  font-size: ${FONTSIZES.xxlarge};
+  margin: 3rem 0;
+  text-align: center;
 `;
