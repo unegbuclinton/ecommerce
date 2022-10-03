@@ -54,7 +54,7 @@ const SingleItem = () => {
 
           <div>
             <p className="preamble">Rating :</p>
-            <span className="value">{rating.rate}</span>
+            <span className="value">{rating?.rate}</span>
           </div>
         </ItemContainer>
 
