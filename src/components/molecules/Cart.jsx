@@ -28,7 +28,7 @@ const Cart = ({ onClose }) => {
   return (
     <CartWrapper>
       <CartEmpty></CartEmpty>
-      <DPIconClose onClick={onClose} />
+      <DPIconClose onClick={onClose} style={{ cursor: 'pointer' }} />
       <CartHeader>SHOPPING CART</CartHeader>
 
       {!!cartItems?.length ? (

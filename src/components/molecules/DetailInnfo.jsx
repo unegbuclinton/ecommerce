@@ -13,7 +13,7 @@ const DetailInfo = ({ header, text }) => {
         onClick={() => setShowData((prev) => !prev)}
       >
         <InfoHeader> {header} </InfoHeader>
-        <DPIconArrowUp className="info-icon" />
+        <DPIconArrowUp className="info-icon" style={{ cursor: 'pointer' }} />
       </div>
 
       <InfoText showData={showData}>{text}</InfoText>

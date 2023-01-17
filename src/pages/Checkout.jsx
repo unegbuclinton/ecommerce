@@ -6,6 +6,7 @@ import Button from '../components/atoms/Button';
 import Layout from '../components/layout/layout';
 import Modal from '../components/layout/Modal';
 import CardItem from '../components/molecules/CardItem';
+import CheckoutAlert from '../components/molecules/CheckoutAlert';
 import OrderMsg from '../components/molecules/OrderMsg';
 import { COLORS } from '../constants/color';
 import { FONTSIZES, FONTWEIGHTS } from '../constants/fonts';
@@ -14,6 +15,7 @@ import { DPIconDelivery, DPIconDiscount } from '../icons';
 const Checkout = () => {
   const [open, setOpen] = useState(false);
   const { cartItems } = useSelector((state) => state.addToCart);
+  const [returnModal, setReturnModal] = useState(false);
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -24,6 +26,10 @@ const Checkout = () => {
       <Wrapper>
         <Modal show={open} hide={() => setOpen(false)}>
           <OrderMsg />
+        </Modal>
+
+        <Modal show={returnModal} hide={() => setReturnModal(false)}>
+          <CheckoutAlert />
         </Modal>
         <CheckoutWrapper>
           <CheckoutHeader>CHECKOUT</CheckoutHeader>
@@ -38,7 +44,12 @@ const Checkout = () => {
 
                     <p className="price-tag">{`$${price}`}</p>
 
-                    <Button className="cart-btn">Remove</Button>
+                    <Button
+                      className="cart-btn"
+                      onClick={() => setReturnModal(true)}
+                    >
+                      Remove
+                    </Button>
                   </div>
                 </CheckoutContainer>
               ))}
